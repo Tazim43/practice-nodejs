@@ -53,12 +53,17 @@ class Calculator {
   }
 }
 
-let cal = new Calculator(0);
+try{
+  let cal = new Calculator(0);
 cal.calculate('10  + 2 + 3 * 7')
 cal.add(10)
 cal.sub(5)
 cal.mul(2)
 cal.div(2)
 console.log(cal.getRes());
+}
+catch(err){
+  console.log(err.message);
+}
 
 
