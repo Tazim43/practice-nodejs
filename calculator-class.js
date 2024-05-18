@@ -17,53 +17,52 @@
 */
 
 class Calculator {
-  constructor(res) {
-    this.result = res;
+  result = 0;
+  constructor() {
+    this.result = parseFloat(0);
   }
   add(num) {
-    this.result += num;
+    this.result += parseFloat(num);
   }
-  sub(num) {
-    this.result -= num;
+  subtract(num) {
+    this.result -= parseFloat(num);
   }
-  mul(num) {
-    this.result *= num;
+  multiply(num) {
+    this.result *= parseFloat(num);
   }
-  div(num) {
+  divide(num) {
+    num = parseFloat(num);
+    if (num === 0) throw new Error("Division by zero");
     this.result /= num;
   }
   clear() {
-    this.result = 0;
+    this.result = parseFloat(0);
   }
-  getRes() {
+  getResult() {
     return this.result;
   }
   calculate(str) {
-    let valid = new Set('0123456789+-*/() ');
+    let valid = new Set("0123456789+-*/() .");
     let newStr = "";
-    for(let i=0; i<str.length; i++){
-      if(valid.has(str[i])){
-        if(str[i]!=' ' && newStr.indexOf(newStr.length) !=' ')newStr += str[i];
-        else if(str[i]!=' ') newStr += str[i];
-      }
-      else throw new Error("Invalid Input");
+    for (let i = 0; i < str.length; i++) {
+      if (valid.has(str[i])) {
+        if (str[i] != " " && newStr.indexOf(newStr.length) != " ")
+          newStr += str[i];
+        else if (str[i] != " ") newStr += str[i];
+      } else throw new Error("Invalid Input");
     }
-    this.result += eval(newStr);
-    
+    try {
+      let val = eval(newStr);
+      if (val === Infinity || val == -Infinity)
+        throw new Error("Division by zero");
+      else this.result += parseFloat(val);
+    } catch (err) {
+      throw new Error(err.message);
+    }
   }
 }
 
-try{
-  let cal = new Calculator(0);
-cal.calculate('10  + 2 + 3 * 7')
-cal.add(10)
-cal.sub(5)
-cal.mul(2)
-cal.div(2)
-console.log(cal.getRes());
-}
-catch(err){
-  console.log(err.message);
-}
+module.exports = Calculator;
+
 
 
