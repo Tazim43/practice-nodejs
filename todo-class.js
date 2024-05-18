@@ -10,45 +10,28 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Todo{
-  todo = []
+class Todo {
+  todo = [];
 
-  add(item){
+  add(item) {
     this.todo.push(item);
   }
-  remove(idx){
-    if(idx>=this.todo.length)throw new Error('index out of range')
-    this.todo.splice(idx, 1)
+  remove(idx) {
+    this.todo.splice(idx, 1);
   }
-  get(idx){
-    return this.todo[idx];
+  get(idx) {
+    if (idx < this.todo.length) return this.todo[idx];
+    else return null;
   }
-  getAll(){
+  getAll() {
     return this.todo;
   }
-  update(idx, item){
-    if(idx>=this.todo.length)throw new Error('index out of range')
-    this.todo[idx] = item;
+  update(idx, item) {
+    if (idx < this.todo.length) this.todo[idx] = item;
   }
-  clear(){
-    this.todo = []
+  clear() {
+    this.todo = [];
   }
-  
 }
 
-try{
-  let todo = new Todo()
-
-  todo.add('finish the assignment')
-  todo.add('go to the gym')
-
-  todo.update(1, 'abc')
-
-  console.log(todo.getAll())
-
-  todo.clear()
-  console.log(todo.getAll())
-}
-catch(err){
-  console.log(err.message)
-}
+module.exports = Todo;
