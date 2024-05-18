@@ -1,4 +1,4 @@
-const Calculator = require("./index");
+const Calculator = require("./calculator-class");
 
 describe("Calculator", () => {
   let calc;
